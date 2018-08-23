@@ -9,7 +9,7 @@
     <name>demo-helloWorld-v1</name>
 
     <parent>
-        <groupId>com.apigee.demo.api</groupId>
+        <groupId>com.apigee.api.commons</groupId>
         <artifactId>demo-helloWorld-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
