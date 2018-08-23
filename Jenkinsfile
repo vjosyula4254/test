@@ -106,26 +106,6 @@ pipeline {
                 }
             }
         }
-
-            stage('Functional Test Report') {
-                steps {
-                    dir('edge') {
-                    step([
-                            $class             : 'CucumberReportPublisher',
-                            fileExcludePattern : '',
-                            fileIncludePattern : "**/reports.json",
-                            ignoreFailedTests  : false,
-                            jenkinsBasePath    : '',
-                            jsonReportDirectory: "target",
-                            missingFails       : false,
-                            parallelTesting    : false,
-                            pendingFails       : false,
-                            skippedFails       : false,
-                            undefinedFails     : false
-                    ])
-                }
-            }
-        }
         
     }
 }
