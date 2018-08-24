@@ -9,7 +9,7 @@
         <Name>flow.edge.error.message</Name>
         <Value>Unhandled Error</Value>
     </AssignVariable>
-    <AssignVariable>
+    <Assign
         <Name>flow.edge.error.info</Name>
         <Value>Provide URL </Value>
     </AssignVariable>
