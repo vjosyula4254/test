@@ -63,8 +63,8 @@ pipeline {
                         usernameVariable: 'apigee_user')]) {
                         bat "mvn apigee-config:targetservers " +
                             "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
-                            "    -Dusername=${params.apigee_user} " +
-                            "    -Dpassword=${params.apigee_pwd}"
+                            "    -Dusername=${apigee_user} " +
+                            "    -Dpassword=${apigee_pwd}"
 
                 }
             }
@@ -79,8 +79,8 @@ pipeline {
                         usernameVariable: 'apigee_user')]) {
                     bat "mvn apigee-config:keyvaluemaps " +
                             "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
-                            "    -Dusername=${params.apigee_user} " +
-                            "    -Dpassword=${params.apigee_pwd}"
+                            "    -Dusername=${apigee_user} " +
+                            "    -Dpassword=${apigee_pwd}"
 
                 }
             }
@@ -104,7 +104,7 @@ pipeline {
                    withCredentials([usernamePassword(credentialsId: "edge-ms-${params.apigee_org}-cred",
                         passwordVariable: 'apigee_pwd',
                         usernameVariable: 'apigee_user')]) {
-                        bat "mvn apigee-enterprise:deploy -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} -Dusername=${params.apigee_user} -Dpassword=${params.apigee_pwd}"
+                        bat "mvn apigee-enterprise:deploy -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} -Dusername=${apigee_user} -Dpassword=${apigee_pwd}"
                 }
             }
         }
@@ -118,7 +118,7 @@ pipeline {
                         usernameVariable: 'apigee_user')]) {
                         bat "mvn -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                             "    -Dapigee.config.options=create " +
-                            "    -Dusername=${params.apigee_user} -Dpassword=${params.apigee_pwd} " +
+                            "    -Dusername=${apigee_user} -Dpassword=${apigee_pwd} " +
                             "    apigee-config:apiproducts " +
                             "    apigee-config:developers apigee-config:apps apigee-config:exportAppKeys"
                 }
