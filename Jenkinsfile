@@ -14,6 +14,20 @@ pipeline {
                 }
             }
         }
+        
+        stages {
+            stage('Clean') {
+                steps {
+                dir('edge') {
+                    bat "npm install
+./node_modules/apigeelint/main.js -s apiproxy/ -f table.js"
+                }
+            }
+        }
+        
+        
+        
+        
             stage('Static Code Analysis, Unit Test and Coverage') {
             
                 steps {
