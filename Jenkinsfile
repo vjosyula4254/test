@@ -19,7 +19,7 @@ pipeline {
             stage('Linting phase') {
                 steps {
                 dir('edge') {
-                     bat "mvn test -Pproxy-linting -Denv=${params.apigee_env} -Dorg=${params.apigee_org} > linting.xml"
+                     bat "mvn test -Pproxy-linting -Denv=${params.apigee_env} -Dorg=${params.apigee_org} > linting.html"
                     
                 }
             }
