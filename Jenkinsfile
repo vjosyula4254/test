@@ -39,7 +39,11 @@ pipeline {
             stage('Pre-Deployment Configuration - Caches') {
                 steps {
                     dir('edge') {
-                    println "Predeployment of Caches "
+                    
+                     println "Predeployment of Caches "
+                withCredentials([usernamePassword(credentialsId: "edge-ms-${params.apigee_org}-cred",
+                        passwordVariable: 'apigee_pwd',
+                        usernameVariable: 'apigee_user')]) {
                     bat "mvn apigee-config:caches " +
                             "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                             "    -Dusername=${apigee_user} " +
