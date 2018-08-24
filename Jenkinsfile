@@ -15,7 +15,7 @@ pipeline {
             }
         }
         
-        stages {
+        
             stage('Linting phase') {
                 steps {
                 dir('edge') {
@@ -23,7 +23,7 @@ pipeline {
                 }
             }
         }
-    }
+    
         
         
         
