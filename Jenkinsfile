@@ -19,7 +19,7 @@ pipeline {
             stage('Linting phase') {
                 steps {
                 dir('edge') {
-                    bat "npm install ./node_modules/apigeelint/main.js -s apiproxy/ -f table.js"
+                    bat "mvn test -Pproxy-linting"
                 }
             }
         }
