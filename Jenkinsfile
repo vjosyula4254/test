@@ -42,8 +42,8 @@ pipeline {
                     println "Predeployment of Caches "
                     bat "mvn apigee-config:caches " +
                             "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
-                            "    -Dusername=${params.apigee_user} " +
-                            "    -Dpassword=${params.apigee_pwd}"
+                            "    -Dusername=${apigee_user} " +
+                            "    -Dpassword=${apigee_pwd}"
 
                 }
             }
