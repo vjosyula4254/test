@@ -44,7 +44,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: "edge-ms-${params.apigee_org}-cred",
                         passwordVariable: 'apigee_pwd',
                         usernameVariable: 'apigee_user')]) {
-                    sh "mvn apigee-config:caches " +
+                    bat "mvn apigee-config:caches " +
                             "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                             "    -Dusername=${apigee_user} " +
                             "    -Dpassword=${apigee_pwd}"
