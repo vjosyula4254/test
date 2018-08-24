@@ -16,7 +16,7 @@ pipeline {
         }
         
         stages {
-            stage('Clean') {
+            stage('Linting phase') {
                 steps {
                 dir('edge') {
                     bat "npm install
