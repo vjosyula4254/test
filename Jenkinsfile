@@ -58,7 +58,10 @@ pipeline {
                 steps {
                     dir('edge') {
                     println "Predeployment of targetservers "
-                    bat "mvn apigee-config:targetservers " +
+                    withCredentials([usernamePassword(credentialsId: "edge-ms-${params.apigee_org}-cred",
+                        passwordVariable: 'apigee_pwd',
+                        usernameVariable: 'apigee_user')]) {
+                        bat "mvn apigee-config:targetservers " +
                             "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                             "    -Dusername=${params.apigee_user} " +
                             "    -Dpassword=${params.apigee_pwd}"
@@ -66,11 +69,14 @@ pipeline {
                 }
             }
         }
-
+  }
             stage('Pre-Deployment Configuration - keyvaluemaps ') {
                 steps {
                     dir('edge') {
                     println "Predeployment of keyvaluemaps  "
+                    withCredentials([usernamePassword(credentialsId: "edge-ms-${params.apigee_org}-cred",
+                        passwordVariable: 'apigee_pwd',
+                        usernameVariable: 'apigee_user')]) {
                     bat "mvn apigee-config:keyvaluemaps " +
                             "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                             "    -Dusername=${params.apigee_user} " +
@@ -79,28 +85,38 @@ pipeline {
                 }
             }
         }
-
+            }
             stage('Build proxy bundle') {
                 steps {
                     dir('edge') {
-                    bat "mvn package -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org}"
+                    withCredentials([usernamePassword(credentialsId: "edge-ms-${params.apigee_org}-cred",
+                        passwordVariable: 'apigee_pwd',
+                        usernameVariable: 'apigee_user')]) {
+                        bat "mvn package -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org}"
 
                 }
             }
         }
-
+            }
             stage('Deploy proxy bundle') {
                 steps {
                     dir('edge') {
-                    bat "mvn apigee-enterprise:deploy -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} -Dusername=${params.apigee_user} -Dpassword=${params.apigee_pwd}"
+                   withCredentials([usernamePassword(credentialsId: "edge-ms-${params.apigee_org}-cred",
+                        passwordVariable: 'apigee_pwd',
+                        usernameVariable: 'apigee_user')]) {
+                        bat "mvn apigee-enterprise:deploy -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} -Dusername=${params.apigee_user} -Dpassword=${params.apigee_pwd}"
                 }
             }
         }
-            stage('Post-Deployment Configurations for API ') {
+            }         
+                stage('Post-Deployment Configurations for API ') {
                 steps {
                     dir('edge') {
                     println "Post-Deployment Configurations for API Products Configurations, App Developer and App Configuration "
-                    bat "mvn -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
+                    withCredentials([usernamePassword(credentialsId: "edge-ms-${params.apigee_org}-cred",
+                        passwordVariable: 'apigee_pwd',
+                        usernameVariable: 'apigee_user')]) {
+                        bat "mvn -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                             "    -Dapigee.config.options=create " +
                             "    -Dusername=${params.apigee_user} -Dpassword=${params.apigee_pwd} " +
                             "    apigee-config:apiproducts " +
@@ -108,6 +124,7 @@ pipeline {
                 }
             }
         }
+   }
 
             stage('Coverage Test Report') {
                 steps {
