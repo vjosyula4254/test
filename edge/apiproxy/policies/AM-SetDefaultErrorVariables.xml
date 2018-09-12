@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AssignMessage async="false" continueOnError="false" enabled="true" name="AM-SetDefaultError">
-    <DisplayName>PM-SetDefaultErrorVariables</DisplayName>
+    <DisplayName>AM-SetDefaultErrorVariables</DisplayName>
     <AssignVariable>
         <Name>flow.edge.error.code</Name>
         <Value>500</Value>
